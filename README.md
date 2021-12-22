@@ -1,4 +1,7 @@
 # nebula-rpc
+
+![Build Status](https://github.com/Telios-org/nebula-rpc/actions/workflows/node.js.yml/badge.svg)
+
 RPC layer for Nebula 
 
 ```shell
