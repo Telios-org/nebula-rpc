@@ -1,0 +1,23 @@
+{
+  "name": "@telios/nebula-rpc",
+  "version": "1.0.0-alpha.1",
+  "description": "RPC layer for Nebula",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Telios-org/nebula-rpc.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Telios-org/nebula-rpc/issues"
+  },
+  "homepage": "https://github.com/Telios-org/nebula-rpc#readme",
+  "dependencies": {
+    "hrpc": "^2.2.0",
+    "hrpc-runtime": "^2.1.1"
+  }
+}

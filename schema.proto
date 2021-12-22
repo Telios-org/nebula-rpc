@@ -1,0 +1,51 @@
+service Drive {
+  rpc MountDrive (DriveRequest) returns (DriveKey) {}
+  rpc SaveIncMailMsg (Email) returns (FileResponse) {}
+  rpc UnlinkMailMsg (FileRequest) returns (Empty) {}
+  rpc AddPeer (PeerRequest) returns (Empty) {}
+  rpc RemovePeer (PeerRequest) returns (Empty) {}
+  rpc DestroyDrive (DriveKey) returns (Empty) {}
+}
+
+message Email {
+ string email = 1;
+}
+
+message FileRequest {
+  string fileName = 1;
+}
+
+message FileResponse {
+  string key = 1;
+  string header = 2;
+  string driveKey = 3;
+  string fileName = 4;
+  string fileSize = 5;
+  string fileHash = 6;
+  string path = 7;
+}
+
+message DriveRequest {
+  string name = 1;
+  string driveKey = 2;
+  PeerKeyPair peerKeyPair = 3;
+  bool writable = 4;
+}
+
+message PeerRequest {
+  string driveKey = 1;
+}
+
+message PeerKeyPair {
+  string publicKey = 1;
+  string secretKey = 2;
+}
+
+message DriveKey {
+  string driveKey = 1;
+  string discoveryKey = 2;
+}
+
+message Empty {
+
+}
