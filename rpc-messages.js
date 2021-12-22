@@ -216,7 +216,7 @@ function defineFileResponse () {
       length += 1 + len
     }
     if (defined(obj.fileSize)) {
-      var len = encodings.string.encodingLength(obj.fileSize)
+      var len = encodings.varint.encodingLength(obj.fileSize)
       length += 1 + len
     }
     if (defined(obj.fileHash)) {
@@ -255,9 +255,9 @@ function defineFileResponse () {
       offset += encodings.string.encode.bytes
     }
     if (defined(obj.fileSize)) {
-      buf[offset++] = 42
-      encodings.string.encode(obj.fileSize, buf, offset)
-      offset += encodings.string.encode.bytes
+      buf[offset++] = 40
+      encodings.varint.encode(obj.fileSize, buf, offset)
+      offset += encodings.varint.encode.bytes
     }
     if (defined(obj.fileHash)) {
       buf[offset++] = 50
@@ -283,7 +283,7 @@ function defineFileResponse () {
       header: "",
       driveKey: "",
       fileName: "",
-      fileSize: "",
+      fileSize: 0,
       fileHash: "",
       path: ""
     }
@@ -313,8 +313,8 @@ function defineFileResponse () {
         offset += encodings.string.decode.bytes
         break
         case 5:
-        obj.fileSize = encodings.string.decode(buf, offset)
-        offset += encodings.string.decode.bytes
+        obj.fileSize = encodings.varint.decode(buf, offset)
+        offset += encodings.varint.decode.bytes
         break
         case 6:
         obj.fileHash = encodings.string.decode(buf, offset)

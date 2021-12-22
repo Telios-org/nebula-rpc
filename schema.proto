@@ -20,7 +20,7 @@ message FileResponse {
   string header = 2;
   string driveKey = 3;
   string fileName = 4;
-  string fileSize = 5;
+  uint32 fileSize = 5;
   string fileHash = 6;
   string path = 7;
 }
