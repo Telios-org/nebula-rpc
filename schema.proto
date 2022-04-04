@@ -5,6 +5,7 @@ service Drive {
   rpc AddPeer (PeerRequest) returns (Empty) {}
   rpc RemovePeer (PeerRequest) returns (Empty) {}
   rpc DestroyDrive (DriveKey) returns (Empty) {}
+  rpc CloseDrive (DriveKey) returns (Empty) {}
 }
 
 message Email {

@@ -55,6 +55,12 @@ class HRPCServiceDrive {
       requestEncoding: messages.DriveKey,
       responseEncoding: messages.Empty
     })
+
+    this._closeDrive = service.defineMethod({
+      id: 7,
+      requestEncoding: messages.DriveKey,
+      responseEncoding: messages.Empty
+    })
   }
 
   onRequest (context, handlers = context) {
@@ -64,6 +70,7 @@ class HRPCServiceDrive {
     if (handlers.addPeer) this._addPeer.onrequest = handlers.addPeer.bind(context)
     if (handlers.removePeer) this._removePeer.onrequest = handlers.removePeer.bind(context)
     if (handlers.destroyDrive) this._destroyDrive.onrequest = handlers.destroyDrive.bind(context)
+    if (handlers.closeDrive) this._closeDrive.onrequest = handlers.closeDrive.bind(context)
   }
 
   mountDrive (data) {
@@ -112,6 +119,14 @@ class HRPCServiceDrive {
 
   destroyDriveNoReply (data) {
     return this._destroyDrive.requestNoReply(data)
+  }
+
+  closeDrive (data) {
+    return this._closeDrive.request(data)
+  }
+
+  closeDriveNoReply (data) {
+    return this._closeDrive.requestNoReply(data)
   }
 }
 
