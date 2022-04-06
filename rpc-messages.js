@@ -44,7 +44,7 @@ var PeerRequest = exports.PeerRequest = {
   decode: null
 }
 
-var PeerKeyPair = exports.PeerKeyPair = {
+var KeyPair = exports.KeyPair = {
   buffer: true,
   encodingLength: null,
   encode: null,
@@ -77,7 +77,7 @@ defineFileRequest()
 defineFileResponse()
 defineDriveRequest()
 definePeerRequest()
-definePeerKeyPair()
+defineKeyPair()
 defineDriveKey()
 defineEmpty()
 defineRPCError()
@@ -346,8 +346,8 @@ function defineDriveRequest () {
       var len = encodings.string.encodingLength(obj.driveKey)
       length += 1 + len
     }
-    if (defined(obj.peerKeyPair)) {
-      var len = PeerKeyPair.encodingLength(obj.peerKeyPair)
+    if (defined(obj.keyPair)) {
+      var len = KeyPair.encodingLength(obj.keyPair)
       length += varint.encodingLength(len)
       length += 1 + len
     }
@@ -372,12 +372,12 @@ function defineDriveRequest () {
       encodings.string.encode(obj.driveKey, buf, offset)
       offset += encodings.string.encode.bytes
     }
-    if (defined(obj.peerKeyPair)) {
+    if (defined(obj.keyPair)) {
       buf[offset++] = 26
-      varint.encode(PeerKeyPair.encodingLength(obj.peerKeyPair), buf, offset)
+      varint.encode(KeyPair.encodingLength(obj.keyPair), buf, offset)
       offset += varint.encode.bytes
-      PeerKeyPair.encode(obj.peerKeyPair, buf, offset)
-      offset += PeerKeyPair.encode.bytes
+      KeyPair.encode(obj.keyPair, buf, offset)
+      offset += KeyPair.encode.bytes
     }
     if (defined(obj.writable)) {
       buf[offset++] = 32
@@ -396,7 +396,7 @@ function defineDriveRequest () {
     var obj = {
       name: "",
       driveKey: "",
-      peerKeyPair: null,
+      keyPair: null,
       writable: false
     }
     while (true) {
@@ -419,8 +419,8 @@ function defineDriveRequest () {
         case 3:
         var len = varint.decode(buf, offset)
         offset += varint.decode.bytes
-        obj.peerKeyPair = PeerKeyPair.decode(buf, offset, offset + len)
-        offset += PeerKeyPair.decode.bytes
+        obj.keyPair = KeyPair.decode(buf, offset, offset + len)
+        offset += KeyPair.decode.bytes
         break
         case 4:
         obj.writable = encodings.bool.decode(buf, offset)
@@ -488,10 +488,10 @@ function definePeerRequest () {
   }
 }
 
-function definePeerKeyPair () {
-  PeerKeyPair.encodingLength = encodingLength
-  PeerKeyPair.encode = encode
-  PeerKeyPair.decode = decode
+function defineKeyPair () {
+  KeyPair.encodingLength = encodingLength
+  KeyPair.encode = encode
+  KeyPair.decode = decode
 
   function encodingLength (obj) {
     var length = 0

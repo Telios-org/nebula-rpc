@@ -29,7 +29,7 @@ message FileResponse {
 message DriveRequest {
   string name = 1;
   string driveKey = 2;
-  PeerKeyPair peerKeyPair = 3;
+  KeyPair keyPair = 3;
   bool writable = 4;
 }
 
@@ -37,7 +37,7 @@ message PeerRequest {
   string driveKey = 1;
 }
 
-message PeerKeyPair {
+message KeyPair {
   string publicKey = 1;
   string secretKey = 2;
 }
